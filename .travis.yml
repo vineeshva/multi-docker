@@ -3,24 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t vineeshva/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t stephengrider/react-test -f ./client/Dockerfile.dev ./client
 
-scripts:
-  - docker run vineeshva/react-test npm test -- --coverage
+script:
+  - docker run stephengrider/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t vineeshva/multi-client ./client
-  - docker build -t vineeshva/multi-nginx ./nginx
-  - docker build -t vineeshva/multi-server ./server
-  - docker build -t vineeshva/multi-worker ./worker
-  # Log into to docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
-
-  #Take those images and push that into docker hub
-  - docker push vineeshva/multi-client
-  - docker push vineeshva/multi-nginx
-  - docker push vineeshva/multi-server
-  - docker push vineeshva/multi-worker
-
-
-
+  - docker build -t stephengrider/multi-client ./client
+  - docker build -t stephengrider/multi-nginx ./nginx
+  - docker build -t stephengrider/multi-server ./server
+  - docker build -t stephengrider/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push stephengrider/multi-client
+  - docker push stephengrider/multi-nginx
+  - docker push stephengrider/multi-server
+  - docker push stephengrider/multi-worker
