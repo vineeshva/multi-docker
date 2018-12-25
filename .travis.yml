@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t vineeshva/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t vineeshva1/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run vineeshva/react-test npm test -- --coverage
+  - docker run vineeshva1/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t vineeshva/multi-client ./client
-  - docker build -t vineeshva/multi-nginx ./nginx
-  - docker build -t vineeshva/multi-server ./server
-  - docker build -t vineeshva/multi-worker ./worker
+  - docker build -t vineeshva1/multi-client ./client
+  - docker build -t vineeshva1/multi-nginx ./nginx
+  - docker build -t vineeshva1/multi-server ./server
+  - docker build -t vineeshva1/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push vineeshva/multi-client
-  - docker push vineeshva/multi-nginx
-  - docker push vineeshva/multi-server
-  - docker push vineeshva/multi-worker
+  - docker push vineeshva1/multi-client
+  - docker push vineeshva1/multi-nginx
+  - docker push vineeshva1/multi-server
+  - docker push vineeshva1/multi-worker
